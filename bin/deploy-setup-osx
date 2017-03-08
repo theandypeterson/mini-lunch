@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+echo "This script expects that you have a valid AWS ACCESS KEY and AWS SECRET ACCESS KEY, and that homebrew is installed. If that is not the case, press CTRL-C now."
+echo "When prompted, use a default region of 'us-west-2' and default output format of 'None'."
+
+sleep 3
+
+brew install awscli || (echo "" && echo "!!! If an error was reported above, do not be concerned if it was because the awscli has already been installed." && echo "")
+aws configure

@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+(
+  echo "!! Notifying SNS to run the refresh punchit task."
+  aws sns publish --topic-arn arn:aws:sns:us-west-2:979276642162:LunchIt-RefreshPunchIt --message "Run" > /dev/null 2>&1
+  echo "Done!"
+)

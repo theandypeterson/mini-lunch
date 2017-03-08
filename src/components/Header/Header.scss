@@ -1,0 +1,32 @@
+.route--active {
+    font-weight: bold;
+    text-decoration: underline;
+}
+.header {
+    height: 200px;
+    margin-bottom: 20px;
+    // font-family: 'Comic Sans MS';
+    .logo {
+        display: inline-block;
+        margin: 1.5rem auto;
+        height: 100%;
+    }
+    .text {
+        display: inline-block;
+        text-align: left;
+        vertical-align: middle;
+        padding-left: 20px;
+        .title {
+            margin-bottom: 10px;
+            font-size: 42px;
+            font-weight: bold;
+            color: #FD4F57;
+        }
+        .description {
+            margin-bottom: 10px;
+            font-size: 21px;
+            font-weight: bold;
+            color: #16CAC2;
+        }
+    }
+}

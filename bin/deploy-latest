@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+docker info > /dev/null 2>&1 || ( echo "Docker does not seem to be running, or installed. Please be sure that the latest version of Docker is installed and running." && exit 5 )
+
+(
+  cd "$DIR/.."
+
+  $(aws ecr get-login)
+
+  echo "!!! Building docker image..."
+  docker build -t lunchit .
+  echo "!!! Tagging docker image..."
+  docker tag lunchit:latest 979276642162.dkr.ecr.us-west-2.amazonaws.com/lunchit:latest
+  echo "!!! Pushing docker image to ECS..."
+  docker push 979276642162.dkr.ecr.us-west-2.amazonaws.com/lunchit:latest
+  echo "!! Notifying SNS to start a deploy"
+  aws sns publish --topic-arn arn:aws:sns:us-west-2:979276642162:LunchIt-WebApp --message "Deploy" > /dev/null 2>&1
+  echo "Done!"
+)
+
+echo "You can check on the status of the deploy by running: aws ecs describe-services --cluster atomic-ecs-small --service LunchIt-WebApp"
