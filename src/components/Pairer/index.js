@@ -32,8 +32,8 @@ const Pairer = (props) => {
       <DropdownButton className="lunchit-secondary-button" title={props.selectedUser.name} onToggle={props.fetchAtoms} id="dropdown" onSelect={props.updateUser}>
         {atoms}
       </DropdownButton>
-      <h2 className="lunchit-header">Pair: SOMEBODY!{props.pair}</h2>
-      <Button className="lunchit-action-button" onClick={props.fetchAtom} >
+      <h2 className="lunchit-header">{props.pair}</h2>
+      <Button className="lunchit-action-button" onClick={props.fetchAtom} disabled={props.pairButtonDisabled}>
         Random Lunch
       </Button>
     </div>
