@@ -21,19 +21,24 @@ const mapDispatchToProps = (dispatch) => {
 const Pairer = (props) => {
   const {
     onPairButtonClick,
+    atomList,
+    selectedUser,
+    fetchAtoms,
+    updateUser,
+    pair
   } = props;
   var atoms = [];
-  if (props.atomList){
-    atoms = props.atomList.map(function(atom){
+  if (atomList){
+    atoms = atomList.map(function(atom){
       return <MenuItem eventKey={atom.user_id}>{atom.name}</MenuItem>
     });
   }
   return (
     <div style={{ margin: '0 auto' }} >
-      <DropdownButton title={props.selectedUser.name} onToggle={props.fetchAtoms} id="dropdown" onSelect={props.updateUser}>
+      <DropdownButton title={selectedUser.name} onToggle={fetchAtoms} id="dropdown" onSelect={updateUser}>
         {atoms}
       </DropdownButton>
-      <h2>Pair: {props.pair}</h2>
+      <h2>Pair: {pair}</h2>
       <Button onClick={onPairButtonClick}>
         Random Lunch
       </Button>

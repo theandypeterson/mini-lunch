@@ -1,13 +1,16 @@
 import {
   PICK_PAIR
 } from '../constants';
+
+import { sample } from 'lodash';
 // ------------------------------------
 // Action Handlers
 // ------------------------------------
 const ACTION_HANDLERS = {
     [PICK_PAIR]: (state, action) => {
+        const pair = getPair();
         return {
-            pair: 'something',
+            pair,
             atomList: state.atomList,
             selectedUser: state.selectedUser
         };
@@ -28,3 +31,6 @@ export default function randomReducer (state = initialState, action) {
     const handler = ACTION_HANDLERS[action.type];
     return handler ? handler(state, action) : state;
 }
+
+
+const getPair = () => sample(['Andy', 'Rachael', 'Dan', 'Alex']);
