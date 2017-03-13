@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Button, DropdownButton, MenuItem } from 'react-bootstrap';
+import '../../styles/core.scss'
 
 const mapStateToProps = (state) => {
   const { pair, atomList, selectedUser, pairButtonDisabled } = state.pairer;
@@ -28,11 +29,11 @@ const Pairer = (props) => {
   }
   return (
     <div style={{ margin: '0 auto' }} >
-      <DropdownButton title={props.selectedUser.name} onToggle={props.fetchAtoms} id="dropdown" onSelect={props.updateUser}>
+      <DropdownButton className="lunchit-secondary-button" title={props.selectedUser.name} onToggle={props.fetchAtoms} id="dropdown" onSelect={props.updateUser}>
         {atoms}
       </DropdownButton>
-      <h2>Pair: {props.pair}</h2>
-      <Button onClick={props.fetchAtom} disabled={props.pairButtonDisabled}>
+      <h2 className="lunchit-header">Pair: SOMEBODY!{props.pair}</h2>
+      <Button className="lunchit-action-button" onClick={props.fetchAtom} >
         Random Lunch
       </Button>
     </div>

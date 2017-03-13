@@ -1,4 +1,4 @@
-@import 'base';
+// @import 'base';
 @import '~normalize.css/normalize';
 // $bootstrap-sass-asset-helper: true;
 // @import '~bootstrap-sass/assets/stylesheets/bootstrap';
@@ -23,9 +23,85 @@ body {
 }
 
 
-
 // OUR STUFF
+$atomic-grey: #4A4A4A;
+$atomic-light-grey: #E0E0E0;
+$atomic-red: #FD4F57;
+$atomic-teal: #16CAC2;
+$atomic-light-teal: #4AC2BF;
+$atomic-medium-teal: #3fa5a3;
+$atomic-dark-teal: #05A599;
+$atomic-off-white: #F9f9f9;
+
+html {
+  background: $atomic-off-white;
+}
+
+.lunchit-bg {
+  background-color: #F9f9f9;
+}
+
 .dropdown-menu {
   height: 400px;
   overflow: scroll;
 }
+
+.lunchit-button {
+  font-family: sans-serif;
+  letter-spacing: 0.143em;
+  font-weight: bold;
+  text-shadow: none;
+  text-transform: uppercase;
+  padding: 2rem;
+  padding-right: 4rem;
+  padding-left: 4rem;
+  margin: 2rem;
+}
+
+.lunchit-action-button {
+  @extend .lunchit-button;
+  color: white;
+  border: 0px;
+  background: $atomic-light-teal;
+  border-bottom: 3px solid $atomic-dark-teal;
+}
+
+.lunchit-action-button:hover {
+  color: white;
+  background: $atomic-medium-teal;
+  border-bottom: 3px solid #048c82;
+}
+
+.lunchit-action-button:disabled {
+  background: $atomic-light-grey;
+  color: $atomic-grey;
+  border-bottom: 3px solid $atomic-grey;
+}
+
+.lunchit-secondary-button {
+  @extend .lunchit-button;
+  background: white;
+  color: $atomic-grey;
+  border: 3px solid $atomic-grey;
+}
+
+.lunchit-secondary-button:hover {
+  background: $atomic-grey;
+  color: white;
+  border-color: $atomic-grey;
+}
+
+.lunchit-header {
+  font-family: 'Merriweather', serif;
+  color: $atomic-grey;
+  font-size: 42px;
+  font-weight: bold;
+}
+
+.lunchit-subheader {
+  font-size: 21px;
+  font-family: "ff-din-web", sans-serif;
+  font-weight: 400;
+}
+
+
