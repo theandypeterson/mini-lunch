@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Button, DropdownButton, MenuItem } from 'react-bootstrap';
 import '../../styles/core.scss'
+import { pickPair } from '../../actions/pairer';
 
 const mapStateToProps = (state) => {
   const { pair, atomList, selectedUser, pairButtonDisabled } = state.pairer;
@@ -15,25 +16,31 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchAtom : () => fetchAtom(),
-    fetchAtoms : (isOpen) => fetchAtoms(isOpen),
-    updateUser : (eventKey) => updateUser(eventKey)
+    onPairButtonClick: () => dispatch(pickPair()),
   };
 };
 const Pairer = (props) => {
+  const {
+    onPairButtonClick,
+    atomList,
+    selectedUser,
+    fetchAtoms,
+    updateUser,
+    pair
+  } = props;
   var atoms = [];
-  if (props.atomList){
-    atoms = props.atomList.map(function(atom){
+  if (atomList){
+    atoms = atomList.map(function(atom){
       return <MenuItem eventKey={atom.user_id}>{atom.name}</MenuItem>
     });
   }
   return (
     <div style={{ margin: '0 auto' }} >
-      <DropdownButton className="lunchit-secondary-button" title={props.selectedUser.name} onToggle={props.fetchAtoms} id="dropdown" onSelect={props.updateUser}>
+      <DropdownButton className="lunchit-secondary-button" title={selectedUser.name} onToggle={fetchAtoms} id="dropdown" onSelect={updateUser}>
         {atoms}
       </DropdownButton>
-      <h2 className="lunchit-header">{props.pair}</h2>
-      <Button className="lunchit-action-button" onClick={props.fetchAtom} disabled={props.pairButtonDisabled}>
+      <h2 className="lunchit-header">Pair: {pair}</h2>
+      <Button className="lunchit-action-button" onClick={onPairButtonClick}>
         Random Lunch
       </Button>
     </div>
@@ -42,12 +49,13 @@ const Pairer = (props) => {
 
 Pairer.propTypes = {
   pair : React.PropTypes.string,
-  fetchAtom : React.PropTypes.func.isRequired,
-  fetchAtoms : React.PropTypes.func.isRequired,
-  updateUser : React.PropTypes.func.isRequired,
+  fetchAtom : React.PropTypes.func,
+  fetchAtoms : React.PropTypes.func,
+  updateUser : React.PropTypes.func,
   atomList: React.PropTypes.array,
   pairButtonDisabled: React.PropTypes.bool,
-  selectedUser: React.PropTypes.object
+  selectedUser: React.PropTypes.object,
+  onPairButtonClick: React.PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Pairer);
