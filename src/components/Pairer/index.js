@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Button, DropdownButton, MenuItem } from 'react-bootstrap';
+import { pickPair } from '../../actions/pairer';
 
 const mapStateToProps = (state) => {
   const { pair, atomList, selectedUser, pairButtonDisabled } = state.pairer;
@@ -14,12 +15,13 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchAtom : () => fetchAtom(),
-    fetchAtoms : (isOpen) => fetchAtoms(isOpen),
-    updateUser : (eventKey) => updateUser(eventKey)
+    onPairButtonClick: () => dispatch(pickPair()),
   };
 };
 const Pairer = (props) => {
+  const {
+    onPairButtonClick,
+  } = props;
   var atoms = [];
   if (props.atomList){
     atoms = props.atomList.map(function(atom){
@@ -32,7 +34,7 @@ const Pairer = (props) => {
         {atoms}
       </DropdownButton>
       <h2>Pair: {props.pair}</h2>
-      <Button onClick={props.fetchAtom} disabled={props.pairButtonDisabled}>
+      <Button onClick={onPairButtonClick}>
         Random Lunch
       </Button>
     </div>
@@ -41,12 +43,13 @@ const Pairer = (props) => {
 
 Pairer.propTypes = {
   pair : React.PropTypes.string,
-  fetchAtom : React.PropTypes.func.isRequired,
-  fetchAtoms : React.PropTypes.func.isRequired,
-  updateUser : React.PropTypes.func.isRequired,
+  fetchAtom : React.PropTypes.func,
+  fetchAtoms : React.PropTypes.func,
+  updateUser : React.PropTypes.func,
   atomList: React.PropTypes.array,
   pairButtonDisabled: React.PropTypes.bool,
-  selectedUser: React.PropTypes.object
+  selectedUser: React.PropTypes.object,
+  onPairButtonClick: React.PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Pairer);
