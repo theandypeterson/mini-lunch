@@ -1,9 +1,14 @@
+import { sample } from 'lodash';
 import {
-  PICK_PAIR
+  SET_PAIR
 } from '../constants';
 
 export function pickPair() {
+  const pair = getPair();
   return {
-    type: PICK_PAIR,
+    type: SET_PAIR,
+    payload: pair,
   };
 }
+
+const getPair = () => sample(['Andy', 'Rachael', 'Dan', 'Alex']);

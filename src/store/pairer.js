@@ -1,36 +1,38 @@
 import {
-  PICK_PAIR
+  SET_PAIR,
+  SET_USER,
+  SET_ATOM_LIST,
 } from '../constants';
 
-import { sample } from 'lodash';
 // ------------------------------------
 // Action Handlers
 // ------------------------------------
 const ACTION_HANDLERS = {
-    [PICK_PAIR]: (state, action) => {
-        const pair = getPair();
-        return {
-            pair,
-            atomList: state.atomList,
-            selectedUser: state.selectedUser
-        };
-    },
+  [SET_PAIR]: (state, action) => {
+    const { payload: pair } = action
+    return Object.assign({}, state, { pair });
+  },
+  [SET_USER]: (state, action) => {
+    const { payload: selectedUser } = action;
+    return Object.assign({}, state, { selectedUser });
+  },
+  [SET_ATOM_LIST]: (state, action) => {
+    const { payload: atomList } = action;
+    return Object.assign({}, state, { atomList });
+  },
 };
 
 // ------------------------------------
 // Reducer
 // ------------------------------------
 export const initialState = {
-    selectedUser: {id: -1, name: "Please select your name"},
-    pair: '',
-    atomList: [{id: -1, name: 'No Results'}],
-    pairButtonDisabled: true
+  selectedUser: {id: -1, name: "Please select your name"},
+  pair: '',
+  atomList: [{id: -1, name: 'No Results'}],
+  pairButtonDisabled: true
 };
 
 export default function randomReducer (state = initialState, action) {
-    const handler = ACTION_HANDLERS[action.type];
-    return handler ? handler(state, action) : state;
+  const handler = ACTION_HANDLERS[action.type];
+  return handler ? handler(state, action) : state;
 }
-
-
-const getPair = () => sample(['Andy', 'Rachael', 'Dan', 'Alex']);
