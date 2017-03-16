@@ -9,7 +9,7 @@ import {
 // ------------------------------------
 const ACTION_HANDLERS = {
   [SET_PAIR]: (state, action) => {
-    const { payload: pair } = action
+    const { payload: pair } = action;
     return Object.assign({}, state, { pair });
   },
   [SET_USER]: (state, action) => {
@@ -33,6 +33,7 @@ export const initialState = {
 };
 
 export default function randomReducer (state = initialState, action) {
-  const handler = ACTION_HANDLERS[action.type];
+  const { type } = action;
+  const handler = ACTION_HANDLERS[type];
   return handler ? handler(state, action) : state;
 }
